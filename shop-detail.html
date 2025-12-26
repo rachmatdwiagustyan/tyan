@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="id">
+
+    <head>
+        <meta charset="utf-8">
+        <title>Jastip Jogjaku08 - Detail Toko</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="" name="keywords">
+        <meta content="" name="description">
+
+        <!-- Google Web Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@600;800&display=swap" rel="stylesheet"> 
+
+        <!-- Icon Font Stylesheet -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+        <!-- Libraries Stylesheet -->
+        <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+        <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+        <!-- Customized Bootstrap Stylesheet -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Template Stylesheet -->
+        <link href="css/style.css" rel="stylesheet">
+        <!-- Custom CSS untuk Footer -->
+        <style>
+            .footer-item {
+                padding-left: 0;
+            }
+            .footer-item.text-start {
+                padding-left: 20px; /* Tambah padding kiri untuk kolom Shop Info dan Account agar gak terlalu ke kiri */
+            }
+            .footer-item h4 {
+                text-align: left;
+            }
+            .footer-item p {
+                text-align: left;
+            }
+            .footer-item a {
+                text-align: left;
+            }
+            /* Custom untuk Produk Unggulan - Rapihkan layout */
+            .featured-product-item {
+                border-bottom: 1px solid #eee; /* Garis pemisah tipis */
+                padding-bottom: 15px;
+            }
+
+            .featured-product-item:last-child {
+                border-bottom: none; /* Hilangin garis di item terakhir */
+            }
+
+            .featured-product-item .text-truncate {
+                max-width: 150px; /* Batasi lebar nama produk biar gak panjang banget */
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .featured-product-item img {
+                object-fit: cover; /* Gambar crop rapi, gak distorsi */
+            }
+
+            @media (max-width: 768px) { /* Mobile responsive */
+                .featured-product-item {
+                    flex-direction: column !important; /* Stack gambar atas, teks bawah */
+                    text-align: center;
+                    gap: 10px;
+                }
+                
+                .featured-product-item .text-truncate {
+                    max-width: 100%; /* Di mobile, nama full width */
+                }
+                
+                .featured-product-item img {
+                    width: 100px !important; /* Sedikit lebih besar di mobile */
+                    height: 100px !important;
+                }
+            }
+
+            /* Fix harga biar align horizontal */
+            .featured-product-item .d-flex.align-items-center.flex-wrap.gap-1 {
+                justify-content: space-between;
+                width: 100%;
+            }
+
+            /* Custom untuk ikon kategori - Sesuai dengan gambar terbaru */
+            .fruite-categorie li i {
+                margin-right: 0.5rem; /* Spasi lebih rapi */
+                font-size: 1.1rem;
+            }
+            .fruite-categorie .fa-seedling { /* Kacang Hijau & Kumbu Hitam - merah */
+                color: #dc3545;
+            }
+            .fruite-categorie .fa-cube { /* Keju - hijau */
+                color: #28a745;
+            }
+            .fruite-categorie .fa-utensils { /* Coklat - hijau */
+                color: #28a745;
+            }
+            .fruite-categorie .fa-leaf { /* Pandan - hijau (ganti dari Durian) */
+                color: #28a745;
+            }
+            /* Nama kategori sudah hijau dari template CSS */
+        </style>
+    </head>
+
+    <body>
+
+        <!-- Spinner Start -->
+        <div id="spinner" class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
+            <div class="spinner-grow text-primary" role="status"></div>
+        </div>
+        <!-- Spinner End -->
+
+        <!-- Navbar start -->
+        <div class="container-fluid fixed-top">
+            <div class="topbar bg-primary d-none d-lg-block" style="height: 60px; padding: 15px 0; width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; border-radius: 0;">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="top-info ps-3">
+                        <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a href="#" class="text-white">Bayuraden Gamping, Sleman Yogyakarta 55281</a></small>
+                        <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a href="#" class="text-white">rachmatagustyan@gmail.com</a></small>
+                    </div>
+                    <div class="top-link pe-3">
+                        <a href="#" class="text-white"><small class="text-white mx-2">Kebijakan Privasi</small>/</a>
+                        <a href="#" class="text-white"><small class="text-white mx-2">Syarat Penggunaan</small>/</a>
+                        <a href="#" class="text-white"><small class="text-white ms-2">Penjualan dan Pengembalian</small></a>
+                    </div>
+                </div>
+            </div>
+            <div class="container px-0">
+                <nav class="navbar navbar-light bg-white navbar-expand-xl">
+                    <a href="index.html" class="navbar-brand"><h1 class="text-primary display-6">Jastip Jogjaku08</h1></a>
+                    <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                        <span class="fa fa-bars text-primary"></span>
+                    </button>
+                    <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
+                        <div class="navbar-nav mx-auto">
+                            <a href="index.html" class="nav-item nav-link">Beranda</a>
+                            <a href="shop.html" class="nav-item nav-link">Toko</a>
+                            <a href="shop-detail.html" class="nav-item nav-link active">Detail Toko</a>
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Halaman</a>
+                                <div class="dropdown-menu m-0 bg-secondary rounded-0">
+                                    <a href="cart.html" class="dropdown-item">Keranjang</a>
+                                    <a href="chackout.html" class="dropdown-item">Pembayaran</a>
+                                    <a href="testimonial.html" class="dropdown-item">Testimoni</a>
+                                </div>
+                            </div>
+                            <a href="contact.html" class="nav-item nav-link">Kontak</a>
+                        </div>
+                        <div class="d-flex m-3 me-0">
+                            <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
+                            <a href="#" class="position-relative me-4 my-auto">
+                                <i class="fa fa-shopping-bag fa-2x"></i>
+                                <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">3</span>
+                            </a>
+                            <a href="#" class="my-auto">
+                                <i class="fas fa-user fa-2x"></i>
+                            </a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <!-- Navbar End -->
+
+        <!-- Modal Search Start -->
+        <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content rounded-0">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Cari dengan kata kunci</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body d-flex align-items-center">
+                        <div class="input-group w-75 mx-auto d-flex">
+                            <input type="search" class="form-control p-3" placeholder="kata kunci" aria-describedby="search-icon-1">
+                            <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Search End -->
+
+        <!-- Single Page Header start -->
+        <div class="container-fluid page-header py-5" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('img/bakpia.jpeg'); background-position: center; background-repeat: no-repeat; background-size: cover;">
+            <h1 class="text-center text-white display-6">Detail Toko</h1>
+            <ol class="breadcrumb justify-content-center mb-0">
+                <li class="breadcrumb-item"><a href="#">Beranda</a></li>
+                <li class="breadcrumb-item"><a href="#">Halaman</a></li>
+                <li class="breadcrumb-item active text-white">Detail Toko</li>
+            </ol>
+        </div>
+        <!-- Single Page Header End -->
+
+        <!-- Single Product Start -->
+        <div class="container-fluid py-5 mt-5">
+            <div class="container py-5">
+                <div class="row g-4 mb-5">
+                    <div class="col-lg-8 col-xl-9">
+                        <div class="row g-4">
+                            <div class="col-lg-6">
+                                <div class="border rounded">
+                                    <a href="#">
+                                        <img src="img/bakpiajuwara.jpg" class="img-fluid rounded" alt="Gambar">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <h4 class="fw-bold mb-3">Bakpia Basah Kacang Hijau</h4>
+                                <p class="mb-3">Kategori: Bakpia</p>
+                                <h5 class="fw-bold mb-3">Rp 35.000</h5>
+                                <div class="d-flex mb-4">
+                                    <i class="fa fa-star text-secondary"></i>
+                                    <i class="fa fa-star text-secondary"></i>
+                                    <i class="fa fa-star text-secondary"></i>
+                                    <i class="fa fa-star text-secondary"></i>
+                                    <i class="fa fa-star text-secondary"></i>
+                                </div>
+                                <p class="mb-4">Bakpia basah kacang hijau dengan rasa autentik Jogja. Segar dan lezat, cocok untuk oleh-oleh atau camilan sehari-hari. Dibuat dari bahan berkualitas tinggi.</p>
+                                <p class="mb-4">Bakpia ini tahan lama dan dikemas rapi untuk pengiriman jastip. Nikmati rasa manis gurih yang khas.</p>
+                                <div class="input-group quantity mb-5" style="width: 100px;">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-sm btn-minus rounded-circle bg-light border" >
+                                            <i class="fa fa-minus"></i>
+                                        </button>
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm text-center border-0 quantity-input" value="1">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-sm btn-plus rounded-circle bg-light border">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <a href="#" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Tambah ke Keranjang</a>
+                            </div>
+                            <div class="col-lg-12">
+                                <nav>
+                                    <div class="nav nav-tabs mb-3">
+                                        <button class="nav-link active border-white border-bottom-0" type="button" role="tab"
+                                            id="nav-about-tab" data-bs-toggle="tab" data-bs-target="#nav-about"
+                                            aria-controls="nav-about" aria-selected="true">Deskripsi</button>
+                                        <button class="nav-link border-white border-bottom-0" type="button" role="tab"
+                                            id="nav-mission-tab" data-bs-toggle="tab" data-bs-target="#nav-mission"
+                                            aria-controls="nav-mission" aria-selected="false">Ulasan</button>
+                                    </div>
+                                </nav>
+                                <div class="tab-content mb-5">
+                                    <div class="tab-pane active" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
+                                        <p>Bakpia basah kacang hijau adalah oleh-oleh khas Jogja yang wajib dicoba. Dengan isian kacang hijau yang lembut dan manis, dibungkus kulit kue yang renyah.</p>
+                                        <p>Sabertooth peacock flounder; chain pickerel hatchetfish, pencilfish snailfish filefish Antarctic 
+                                            icefish goldeye aholehole trumpetfish pilot fish airbreathing catfish, electric ray sweeper.</p>
+                                        <div class="px-2">
+                                            <div class="row g-4">
+                                                <div class="col-6">
+                                                    <div class="row bg-light align-items-center text-center justify-content-center py-2">
+                                                        <div class="col-6">
+                                                            <p class="mb-0">Berat</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="mb-0">1 kg</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row text-center align-items-center justify-content-center py-2">
+                                                        <div class="col-6">
+                                                            <p class="mb-0">Asal Daerah</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="mb-0">Jogja</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row bg-light text-center align-items-center justify-content-center py-2">
+                                                        <div class="col-6">
+                                                            <p class="mb-0">Kualitas</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="mb-0">Premium</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row text-center align-items-center justify-content-center py-2">
+                                                        <div class="col-6">
+                                                            <p class="mb-0">Cek</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="mb-0">Berkualitas</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row bg-light text-center align-items-center justify-content-center py-2">
+                                                        <div class="col-6">
+                                                            <p class="mb-0">Berat Min</p>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="mb-0">250 g</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="nav-mission" role="tabpanel" aria-labelledby="nav-mission-tab">
+                                        <div class="d-flex">
+                                            <img src="img/nopal.jpeg" class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;" alt="">
+                                            <div class="">
+                                                <p class="mb-2" style="font-size: 14px;">19 Desember 2025</p>
+                                                <div class="d-flex justify-content-between">
+                                                    <h5>Muhammad Naufal Al Faiz</h5>
+                                                    <div class="d-flex mb-3">
+                                                        <i class="fa fa-star text-secondary"></i>
+                                                        <i class="fa fa-star text-secondary"></i>
+                                                        <i class="fa fa-star text-secondary"></i>
+                                                        <i class="fa fa-star text-secondary"></i>
+                                                        <i class="fa fa-star text-secondary"></i>
+                                                    </div>
+                                                </div>
+                                                <p>Bakpia ini sangat enak, rasa kacang hijau-nya pas, pengiriman cepat. Rekomendasi!</p>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex">
+                                            <img src="img/aul.jpeg" class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;" alt="">
+                                            <div class="">
+                                                <p class="mb-2" style="font-size: 14px;">25 Desember 2025</p>
+                                                <div class="d-flex justify-content-between">
+                                                    <h5>Aulia Divany Joyinda</h5>
+                                                    <div class="d-flex mb-3">
+                                                        <i class="fa fa-star text-secondary"></i>
+                                                        <i class="fa fa-star text-secondary"></i>
+                                                        <i class="fa fa-star text-secondary"></i>
+                                                        <i class="fa fa-star text-secondary"></i>
+                                                        <i class="fa fa-star text-secondary"></i>
+                                                    </div>
+                                                </div>
+                                                <p class="text-dark">Rasa autentik Jogja, kemasan rapi. Cocok untuk oleh-oleh keluarga.</p>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex">
+                                            <img src="img/randhi.jpeg" class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;" alt="">
+                                            <div class="">
+                                                <p class="mb-2" style="font-size: 14px;">30 Desember 2025</p>
+                                                <div class="d-flex justify-content-between">
+                                                    <h5>M.Radhi</h5>
+                                                    <div class="d-flex mb-3">
+                                                        <i class="fa fa-star text-secondary"></i>
+                                                        <i class="fa fa-star text-secondary"></i>
+                                                        <i class="fa fa-star text-secondary"></i>
+                                                        <i class="fa fa-star text-secondary"></i>
+                                                        <i class="fa fa-star text-secondary"></i>
+                                                    </div>
+                                                </div>
+                                                <p>Produk berkualitas tinggi, layanan jastip sangat memuaskan. Akan pesan lagi!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <form action="#">
+                                <h4 class="mb-5 fw-bold">Tinggalkan Ulasan</h4>
+                                <div class="row g-4">
+                                    <div class="col-lg-6">
+                                        <div class="border-bottom rounded">
+                                            <input type="text" class="form-control border-0 me-4" placeholder="Nama Anda *">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="border-bottom rounded">
+                                            <input type="email" class="form-control border-0" placeholder="Email Anda *">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="border-bottom rounded my-4">
+                                            <textarea name="" id="" class="form-control border-0" cols="30" rows="8" placeholder="Ulasan Anda *" spellcheck="false"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="d-flex justify-content-between py-3 mb-5">
+                                            <div class="d-flex align-items-center">
+                                                <p class="mb-0 me-3">Berikan rating:</p>
+                                                <div class="d-flex align-items-center" style="font-size: 12px;">
+                                                    <i class="fa fa-star text-muted"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                </div>
+                                            </div>
+                                            <a href="#" class="btn border border-secondary text-primary rounded-pill px-4 py-3">Kirim Komentar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-xl-3">
+                        <div class="row g-4 fruite">
+                            <div class="col-lg-12">
+                                <div class="input-group w-100 mx-auto d-flex mb-4">
+                                    <input type="search" class="form-control p-3" placeholder="kata kunci" aria-describedby="search-icon-1">
+                                    <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
+                                </div>
+                                <div class="mb-4">
+                                    <h4>Kategori</h4>
+                                    <ul class="list-unstyled fruite-categorie">
+                                        <li>
+                                            <div class="d-flex justify-content-between fruite-name">
+                                                <a href="#"><i class="fas fa-seedling me-2"></i>Kacang Hijau</a>
+                                                <span>(3)</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="d-flex justify-content-between fruite-name">
+                                                <a href="#"><i class="fas fa-seedling me-2"></i>Kumbu Hitam</a>
+                                                <span>(5)</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="d-flex justify-content-between fruite-name">
+                                                <a href="#"><i class="fas fa-cube me-2"></i>Keju</a>
+                                                <span>(2)</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="d-flex justify-content-between fruite-name">
+                                                <a href="#"><i class="fas fa-utensils me-2"></i>Coklat</a>
+                                                <span>(8)</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="d-flex justify-content-between fruite-name">
+                                                <a href="#"><i class="fas fa-leaf me-2"></i>Pandan</a>
+                                                <span>(5)</span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <h4 class="mb-4">Produk Unggulan</h4>
+                                <div class="featured-product-item mb-3 d-flex align-items-start flex-wrap" style="gap: 15px;">
+                                    <div class="rounded flex-shrink-0" style="width: 80px; height: 80px; overflow: hidden;">
+                                        <img src="img/bakpiakeju.jpg" class="img-fluid w-100 h-100 object-fit-cover rounded" alt="Bakpia Keju">
+                                    </div>
+                                    <div class="flex-grow-1 min-width-0">
+                                        <h6 class="mb-2 fw-bold text-truncate" style="font-size: 0.95rem;">Bakpia Keju</h6>
+                                        <div class="d-flex mb-1">
+                                            <i class="fa fa-star text-secondary me-1"></i>
+                                            <i class="fa fa-star text-secondary me-1"></i>
+                                            <i class="fa fa-star text-secondary me-1"></i>
+                                            <i class="fa fa-star text-secondary me-1"></i>
+                                            <i class="fa fa-star text-warning"></i>
+                                            <small class="text-muted ms-1">(4.5)</small>
+                                        </div>
+                                        <div class="d-flex align-items-center flex-wrap gap-1">
+                                            <h6 class="fw-bold mb-0 text-success" style="font-size: 0.9rem;">Rp 35.000</h6>
+                                            <small class="text-danger text-decoration-line-through ms-1">Rp 45.000</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="featured-product-item mb-3 d-flex align-items-start flex-wrap" style="gap: 15px;">
+                                    <div class="rounded flex-shrink-0" style="width: 80px; height: 80px; overflow: hidden;">
+                                        <img src="img/bakpiakumbuhitam.jpg" class="img-fluid w-100 h-100 object-fit-cover rounded" alt="Bakpia Kumbu Hitam">
+                                    </div>
+                                    <div class="flex-grow-1 min-width-0">
+                                        <h6 class="mb-2 fw-bold text-truncate" style="font-size: 0.95rem;">Bakpia Kumbu Hitam</h6>
+                                        <div class="d-flex mb-1">
+                                            <i class="fa fa-star text-secondary me-1"></i>
+                                            <i class="fa fa-star text-secondary me-1"></i>
+                                            <i class="fa fa-star text-secondary me-1"></i>
+                                            <i class="fa fa-star text-secondary me-1"></i>
+                                            <i class="fa fa-star text-warning"></i>
+                                            <small class="text-muted ms-1">(4.5)</small>
+                                        </div>
+                                        <div class="d-flex align-items-center flex-wrap gap-1">
+                                            <h6 class="fw-bold mb-0 text-success" style="font-size: 0.9rem;">Rp 35.000</h6>
+                                            <small class="text-danger text-decoration-line-through ms-1">Rp 45.000</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="featured-product-item mb-3 d-flex align-items-start flex-wrap" style="gap: 15px;">
+                                    <div class="rounded flex-shrink-0" style="width: 80px; height: 80px; overflow: hidden;">
+                                        <img src="img/bakpiakukustuguoriginal.jpg" class="img-fluid w-100 h-100 object-fit-cover rounded" alt="Bakpia Kukus Tugu Original Coklat">
+                                    </div>
+                                    <div class="flex-grow-1 min-width-0">
+                                        <h6 class="mb-2 fw-bold text-truncate" style="font-size: 0.95rem;">Bakpia tugu Coklat</h6>
+                                        <div class="d-flex mb-1">
+                                            <i class="fa fa-star text-secondary me-1"></i>
+                                            <i class="fa fa-star text-secondary me-1"></i>
+                                            <i class="fa fa-star text-secondary me-1"></i>
+                                            <i class="fa fa-star text-secondary me-1"></i>
+                                            <i class="fa fa-star text-warning"></i>
+                                            <small class="text-muted ms-1">(4.5)</small>
+                                        </div>
+                                        <div class="d-flex align-items-center flex-wrap gap-1">
+                                            <h6 class="fw-bold mb-0 text-success" style="font-size: 0.9rem;">Rp 50.000</h6>
+                                            <small class="text-danger text-decoration-line-through ms-1">Rp 60.000</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="featured-product-item mb-3 d-flex align-items-start flex-wrap" style="gap: 15px;">
+                                    <div class="rounded flex-shrink-0" style="width: 80px; height: 80px; overflow: hidden;">
+                                        <img src="img/bakpiatugukeju.jpg" class="img-fluid w-100 h-100 object-fit-cover rounded" alt="Bakpia Basah Kacang Hijau">
+                                    </div>
+                                    <div class="flex-grow-1 min-width-0">
+                                        <h6 class="mb-2 fw-bold text-truncate" style="font-size: 0.95rem;">Bakpia Tugu Keju</h6>
+                                        <div class="d-flex mb-1">
+                                            <i class="fa fa-star text-secondary me-1"></i>
+                                            <i class="fa fa-star text-secondary me-1"></i>
+                                            <i class="fa fa-star text-secondary me-1"></i>
+                                            <i class="fa fa-star text-secondary me-1"></i>
+                                            <i class="fa fa-star text-warning"></i>
+                                            <small class="text-muted ms-1">(4.5)</small>
+                                        </div>
+                                        <div class="d-flex align-items-center flex-wrap gap-1">
+                                            <h6 class="fw-bold mb-0 text-success" style="font-size: 0.9rem;">Rp 50.000</h6>
+                                            <small class="text-danger text-decoration-line-through ms-1">Rp 60.000</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="featured-product-item mb-3 d-flex align-items-start flex-wrap" style="gap: 15px;">
+                                    <div class="rounded flex-shrink-0" style="width: 80px; height: 80px; overflow: hidden;">
+                                        <img src="img/bakpiakukustugupandancoklat.jpg" class="img-fluid w-100 h-100 object-fit-cover rounded" alt="Bakpia Durian"> <!-- Ganti src kalau ada gambar durian -->
+                                    </div>
+                                    <div class="flex-grow-1 min-width-0">
+                                        <h6 class="mb-2 fw-bold text-truncate" style="font-size: 0.95rem;">Bakpia tugu Pandan</h6>
+                                        <div class="d-flex mb-1">
+                                            <i class="fa fa-star text-secondary me-1"></i>
+                                            <i class="fa fa-star text-secondary me-1"></i>
+                                            <i class="fa fa-star text-secondary me-1"></i>
+                                            <i class="fa fa-star text-secondary me-1"></i>
+                                            <i class="fa fa-star text-warning"></i>
+                                            <small class="text-muted ms-1">(4.5)</small>
+                                        </div>
+                                        <div class="d-flex align-items-center flex-wrap gap-1">
+                                            <h6 class="fw-bold mb-0 text-success" style="font-size: 0.9rem;">Rp 50.000</h6>
+                                            <small class="text-danger text-decoration-line-through ms-1">Rp 60.000</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="d-flex justify-content-center my-4">
+                                    <a href="#" class="btn border border-secondary px-4 py-3 rounded-pill text-primary w-100">Lihat Lebih Banyak</a>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="position-relative">
+                                    <img src="img/bakpia.jpeg" class="img-fluid w-100 rounded" alt="">
+                                    <div class="position-absolute" style="top: 50%; right: 10px; transform: translateY(-50%);">
+                                        <h3 class="text-secondary fw-bold">Bakpia <br> tugu <br> Jogja</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h1 class="fw-bold mb-0">Produk Terkait</h1>
+                <div class="vesitable">
+                    <div class="owl-carousel vegetable-carousel justify-content-center">
+                        <div class="border border-primary rounded position-relative vesitable-item">
+                            <div class="vesitable-img">
+                                <img src="img/bakpiakumbuhitam.jpg" class="img-fluid w-100 rounded-top" alt="">
+                            </div>
+                            <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Bakpia</div>
+                            <div class="p-4 pb-0 rounded-bottom">
+                                <h4>Bakpia Kumbu Hitam</h4>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+                                <div class="d-flex justify-content-between flex-lg-wrap">
+                                    <p class="text-dark fs-5 fw-bold">Rp 35.000 / box</p>
+                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Tambah ke Keranjang</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border border-primary rounded position-relative vesitable-item">
+                            <div class="vesitable-img">
+                                <img src="img/bakpiakeju.jpg" class="img-fluid w-100 rounded-top" alt="">
+                            </div>
+                            <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Bakpia</div>
+                            <div class="p-4 pb-0 rounded-bottom">
+                                <h4>Bakpia Keju</h4>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+                                <div class="d-flex justify-content-between flex-lg-wrap">
+                                    <p class="text-dark fs-5 fw-bold">Rp 35.000 / box</p>
+                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Tambah ke Keranjang</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border border-primary rounded position-relative vesitable-item">
+                            <div class="vesitable-img">
+                                <img src="img/bakpiajuwara.jpg" class="img-fluid w-100 rounded-top bg-light" alt="">
+                            </div>
+                            <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Bakpia</div>
+                            <div class="p-4 pb-0 rounded-bottom">
+                                <h4>Bakpia Coklat</h4>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+                                <div class="d-flex justify-content-between flex-lg-wrap">
+                                    <p class="text-dark fs-5 fw-bold">Rp 35.000 / box</p>
+                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Tambah ke Keranjang</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border border-primary rounded position-relative vesitable-item">
+                            <div class="vesitable-img">
+                                <img src="img/bakpiakukustugupandancoklat.jpg" class="img-fluid w-100 rounded-top" alt="">
+                            </div>
+                            <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Bakpia</div>
+                            <div class="p-4 pb-0 rounded-bottom">
+                                <h4>Bakpia Kukus Pandan Coklat</h4>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+                                <div class="d-flex justify-content-between flex-lg-wrap">
+                                    <p class="text-dark fs-5 fw-bold">Rp 50.000 / box </p>
+                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Tambah ke Keranjang</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border border-primary rounded position-relative vesitable-item">
+                            <div class="vesitable-img">
+                                <img src="img/bakpiakukustuguoriginal.jpg" class="img-fluid w-100 rounded-top" alt="">
+                            </div>
+                            <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Bakpia</div>
+                            <div class="p-4 pb-0 rounded-bottom">
+                                <h4>Bakpia Kukus Tugu Coklat</h4>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+                                <div class="d-flex justify-content-between flex-lg-wrap">
+                                    <p class="text-dark fs-5 fw-bold">Rp 50.000 / box</p>
+                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Tambah ke Keranjang</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border border-primary rounded position-relative vesitable-item">
+                            <div class="vesitable-img">
+                                <img src="img/bakpiatugukeju.jpg" class="img-fluid w-100 rounded-top" alt="">
+                            </div>
+                            <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Bakpia</div>
+                            <div class="p-4 pb-0 rounded-bottom">
+                                <h4>Bakpia Kukus Tugu Keju</h4>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+                                <div class="d-flex justify-content-between flex-lg-wrap">
+                                    <p class="text-dark fs-5 fw-bold">Rp 50.000 / box</p>
+                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Tambah ke Keranjang</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border border-primary rounded position-relative vesitable-item">
+                            <div class="vesitable-img">
+                                <img src="img/bakpiaredvelvet.jpg" class="img-fluid w-100 rounded-top" alt="">
+                            </div>
+                            <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Bakpia</div>
+                            <div class="p-4 pb-0 rounded-bottom">
+                                <h4>Bakpia Kukus Tugu Redvelvet</h4>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+                                <div class="d-flex justify-content-between flex-lg-wrap">
+                                    <p class="text-dark fs-5 fw-bold">Rp 50.000 / box</p>
+                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Tambah ke Keranjang</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border border-primary rounded position-relative vesitable-item">
+                            <div class="vesitable-img">
+                                <img src="img/bakpiaklepon.jpg" class="img-fluid w-100 rounded-top" alt="">
+                            </div>
+                            <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Bakpia</div>
+                            <div class="p-4 pb-0 rounded-bottom">
+                                <h4>Bakpia Kukus Tugu Klepon</h4>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+                                <div class="d-flex justify-content-between flex-lg-wrap">
+                                    <p class="text-dark fs-5 fw-bold">Rp 50.000 / box</p>
+                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Tambah ke Keranjang</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Single Product End -->
+
+        <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5">
+            <div class="container py-5">
+                <div class="pb-4 mb-4" style="border-bottom: 1px solid rgba(226, 175, 24, 0.5) ;">
+                    <div class="row g-4">
+                        <div class="col-lg-3">
+                            <a href="#">
+                                <h1 class="text-primary mb-0">Jastip Jogjaku08</h1>
+                            </a>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="position-relative mx-auto">
+                                <input class="form-control border-0 w-100 py-3 px-4 rounded-pill" type="email" placeholder="Email Anda">
+                                <button type="submit" class="btn btn-primary border-0 border-secondary py-3 px-4 position-absolute rounded-pill text-white" style="top: 0; right: 0;">Berlangganan Sekarang</button>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="d-flex justify-content-end pt-3">
+                                <a class="btn  btn-outline-secondary me-2 btn-md-square rounded-circle" href=""><i class="fab fa-twitter"></i></a>
+                                <a class="btn btn-outline-secondary me-2 btn-md-square rounded-circle" href=""><i class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-outline-secondary me-2 btn-md-square rounded-circle" href=""><i class="fab fa-youtube"></i></a>
+                                <a class="btn btn-outline-secondary btn-md-square rounded-circle" href=""><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-5">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-item">
+                            <h4 class="text-light mb-3">Mengapa Orang Suka Kami!</h4>
+                            <p class="mb-4">Jastip Jogjaku 08 dikenal dengan layanan cepat, aman, dan jelas dalam setiap transaksi. Kami menjaga kualitas belanja tetap mudah dan terpercaya, sehingga pelanggan selalu merasa puas saat menitipkan kebutuhan mereka kepada kami.</p>
+                            <a href="" class="btn border-secondary py-2 px-4 rounded-pill text-primary">Baca Selengkapnya</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="d-flex flex-column text-start footer-item">
+                            <h4 class="text-light mb-3">Info Toko</h4>
+                            <a class="btn-link" href="">Tentang Kami</a>
+                            <a class="btn-link" href="">Hubungi Kami</a>
+                            <a class="btn-link" href="">Kebijakan Privasi</a>
+                            <a class="btn-link" href="">Syarat & Ketentuan</a>
+                            <a class="btn-link" href="">Kebijakan Pengembalian</a>
+                            <a class="btn-link" href="">FAQ & Bantuan</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="d-flex flex-column text-start footer-item">
+                            <h4 class="text-light mb-3">Akun</h4>
+                            <a class="btn-link" href="">Akun Saya</a>
+                            <a class="btn-link" href="">Detail Toko</a>
+                            <a class="btn-link" href="">Keranjang Belanja</a>
+                            <a class="btn-link" href="">Daftar Keinginan</a>
+                            <a class="btn-link" href="">Riwayat Pesanan</a>
+                            <a class="btn-link" href="">Pesanan Internasional</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-item">
+                            <h4 class="text-light mb-3">Kontak</h4>
+                            <p>Alamat: Bayuraden Gamping, Sleman Yogyakarta 55281</p>
+                            <p>Email: rachmatagustyan@gmail.com</p>
+                            <p>Telepon: 085357899235</p>
+                            <p>Pembayaran Diterima</p>
+                            <img src="img/payment.png" class="img-fluid" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+
+        <!-- Copyright Start -->
+        <div class="container-fluid copyright bg-dark py-4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                    </div>
+                    <div class="col-md-6 my-auto text-center text-md-end text-white">
+                        Dirancang oleh Rachmat Dwi Agustyan untuk Jastip Jogjaku08
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Copyright End -->
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>   
+
+        
+    <!-- JavaScript Libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/lightbox/js/lightbox.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+    <!-- Custom JavaScript untuk Quantity -->
+    <script>
+        $(document).ready(function() {
+            $('.btn-plus').click(function() {
+                var input = $(this).closest('.input-group').find('.quantity-input');
+                var currentVal = parseInt(input.val());
+                if (!isNaN(currentVal)) {
+                    input.val(currentVal + 1);
+                }
+            });
+
+            $('.btn-minus').click(function() {
+                var input = $(this).closest('.input-group').find('.quantity-input');
+                var currentVal = parseInt(input.val());
+                if (!isNaN(currentVal) && currentVal > 1) {
+                    input.val(currentVal - 1);
+                }
+            });
+        });
+    </script>
+    </body>
+
+</html>

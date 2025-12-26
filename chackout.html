@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="id">
+
+    <head>
+        <meta charset="utf-8">
+        <title>Jastip Jogjaku08 - Checkout</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="" name="keywords">
+        <meta content="" name="description">
+
+        <!-- Google Web Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@600;800&display=swap" rel="stylesheet"> 
+
+        <!-- Icon Font Stylesheet -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+        <!-- Libraries Stylesheet -->
+        <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+        <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+        <!-- Customized Bootstrap Stylesheet -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Template Stylesheet -->
+        <link href="css/style.css" rel="stylesheet">
+        <!-- Custom CSS untuk Footer dan Table Alignment -->
+        <style>
+            .footer-item {
+                padding-left: 0;
+            }
+            .footer-item.text-start {
+                padding-left: 20px; /* Tambah padding kiri untuk kolom Shop Info dan Account agar gak terlalu ke kiri */
+            }
+            .footer-item h4 {
+                text-align: left;
+            }
+            .footer-item p {
+                text-align: left;
+            }
+            .footer-item a {
+                text-align: left;
+            }
+            /* Custom style untuk quantity di checkout */
+            .quantity-group {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 5px;
+            }
+            .quantity-btn {
+                width: 30px;
+                height: 30px;
+                border: 1px solid #ddd;
+                background: #f8f9fa;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                font-size: 12px;
+                color: #6c757d;
+            }
+            .quantity-btn:hover {
+                background: #e9ecef;
+                color: #495057;
+            }
+            .quantity-input {
+                width: 50px;
+                text-align: center;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                padding: 5px;
+                font-size: 14px;
+                height: 30px;
+            }
+            /* Rapihin alignment nama produk di td - match gambar */
+            .product-name {
+                font-size: 14px;
+                line-height: 1.2;
+                max-width: 120px;
+            }
+            .product-name .main-name {
+                font-weight: 600;
+                color: #212529;
+            }
+            .product-name .variant {
+                font-size: 12px;
+                color: #6c757d;
+                margin-top: 2px;
+            }
+            .table td {
+                vertical-align: middle;
+                padding: 1rem 0.5rem; /* Kurangi padding biar lebih compact seperti gambar */
+            }
+            .table th {
+                font-size: 14px;
+                font-weight: 600;
+            }
+            /* Custom untuk form billing agar lebih rapi seperti gambar */
+            .form-item label {
+                font-weight: 600;
+                color: #495057;
+                font-size: 14px;
+            }
+            .form-control {
+                border-radius: 8px;
+                border: 1px solid #e9ecef;
+                padding: 12px;
+            }
+            .form-check-label {
+                font-size: 14px;
+                color: #495057;
+            }
+            hr {
+                border-color: #e9ecef;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <!-- Spinner Start -->
+        <div id="spinner" class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
+            <div class="spinner-grow text-primary" role="status"></div>
+        </div>
+        <!-- Spinner End -->
+
+        <!-- Navbar start -->
+        <div class="container-fluid fixed-top">
+            <div class="topbar bg-primary d-none d-lg-block" style="height: 60px; padding: 15px 0; width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; border-radius: 0;">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="top-info ps-3">
+                        <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a href="#" class="text-white">Bayuraden Gamping, Sleman Yogyakarta 55281</a></small>
+                        <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a href="#" class="text-white">rachmatagustyan@gmail.com</a></small>
+                    </div>
+                    <div class="top-link pe-3">
+                        <a href="#" class="text-white"><small class="text-white mx-2">Kebijakan Privasi</small>/</a>
+                        <a href="#" class="text-white"><small class="text-white mx-2">Syarat Penggunaan</small>/</a>
+                        <a href="#" class="text-white"><small class="text-white ms-2">Penjualan dan Pengembalian</small></a>
+                    </div>
+                </div>
+            </div>
+            <div class="container px-0">
+                <nav class="navbar navbar-light bg-white navbar-expand-xl">
+                    <a href="index.html" class="navbar-brand"><h1 class="text-primary display-6">Jastip Jogjaku08</h1></a>
+                    <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                        <span class="fa fa-bars text-primary"></span>
+                    </button>
+                    <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
+                        <div class="navbar-nav mx-auto">
+                            <a href="index.html" class="nav-item nav-link">Beranda</a>
+                            <a href="shop.html" class="nav-item nav-link">Toko</a>
+                            <a href="shop-detail.html" class="nav-item nav-link">Detail Toko</a>
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Halaman</a>
+                                <div class="dropdown-menu m-0 bg-secondary rounded-0">
+                                    <a href="cart.html" class="dropdown-item">Keranjang</a>
+                                    <a href="chackout.html" class="dropdown-item active">Pembayaran</a>
+                                    <a href="testimonial.html" class="dropdown-item">Testimoni</a>
+                                </div>
+                            </div>
+                            <a href="contact.html" class="nav-item nav-link">Kontak</a>
+                        </div>
+                        <div class="d-flex m-3 me-0">
+                            <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
+                            <a href="#" class="position-relative me-4 my-auto">
+                                <i class="fa fa-shopping-bag fa-2x"></i>
+                                <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">3</span>
+                            </a>
+                            <a href="#" class="my-auto">
+                                <i class="fas fa-user fa-2x"></i>
+                            </a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <!-- Navbar End -->
+
+        <!-- Modal Search Start -->
+        <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content rounded-0">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Cari dengan kata kunci</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body d-flex align-items-center">
+                        <div class="input-group w-75 mx-auto d-flex">
+                            <input type="search" class="form-control p-3" placeholder="kata kunci" aria-describedby="search-icon-1">
+                            <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Search End -->
+
+        <!-- Single Page Header start -->
+        <div class="container-fluid page-header py-5" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('img/bakpia.jpeg'); background-position: center; background-repeat: no-repeat; background-size: cover;">
+            <h1 class="text-center text-white display-6">Pembayaran</h1>
+            <ol class="breadcrumb justify-content-center mb-0">
+                <li class="breadcrumb-item"><a href="#">Beranda</a></li>
+                <li class="breadcrumb-item"><a href="#">Halaman</a></li>
+                <li class="breadcrumb-item active text-white">Pembayaran</li>
+            </ol>
+        </div>
+        <!-- Single Page Header End -->
+
+        <!-- Checkout Page Start -->
+        <div class="container-fluid py-5">
+            <div class="container py-5">
+                <h1 class="mb-4">Detail Penagihan</h1>
+                <form action="#">
+                    <div class="row g-5">
+                        <div class="col-md-12 col-lg-6 col-xl-7">
+                            <div class="row">
+                                <div class="col-md-12 col-lg-6">
+                                    <div class="form-item w-100">
+                                        <label class="form-label my-3">Nama Depan<sup>*</sup></label>
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-lg-6">
+                                    <div class="form-item w-100">
+                                        <label class="form-label my-3">Nama Belakang<sup>*</sup></label>
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-item">
+                                <label class="form-label my-3">Nama Perusahaan</label>
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="form-item">
+                                <label class="form-label my-3">Alamat <sup>*</sup></label>
+                                <input type="text" class="form-control" placeholder="Nomor Rumah Nama Jalan">
+                            </div>
+                            <div class="form-item">
+                                <label class="form-label my-3">Kota/Kabupaten<sup>*</sup></label>
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="form-item">
+                                <label class="form-label my-3">Negara<sup>*</sup></label>
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="form-item">
+                                <label class="form-label my-3">Kode Pos<sup>*</sup></label>
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="form-item">
+                                <label class="form-label my-3">Ponsel<sup>*</sup></label>
+                                <input type="tel" class="form-control">
+                            </div>
+                            <div class="form-item">
+                                <label class="form-label my-3">Alamat Email<sup>*</sup></label>
+                                <input type="email" class="form-control">
+                            </div>
+                            <div class="form-check my-3">
+                                <input type="checkbox" class="form-check-input" id="Account-1" name="Accounts" value="Accounts">
+                                <label class="form-check-label" for="Account-1">Buat akun?</label>
+                            </div>
+                            <hr>
+                            <div class="form-check my-3">
+                                <input class="form-check-input" type="checkbox" id="Address-1" name="Address" value="Address">
+                                <label class="form-check-label" for="Address-1">Kirim ke alamat berbeda?</label>
+                            </div>
+                            <div class="form-item">
+                                <textarea name="text" class="form-control" spellcheck="false" cols="30" rows="11" placeholder="Catatan Pesanan (Opsional)"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-lg-6 col-xl-5">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Produk</th>
+                                            <th scope="col">Nama</th>
+                                            <th scope="col">Harga</th>
+                                            <th scope="col">Jumlah</th>
+                                            <th scope="col">Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr data-row-id="1">
+                                            <th scope="row">
+                                                <div class="d-flex align-items-center mt-2">
+                                                    <img src="img/bakpiajuwara.jpg" class="img-fluid me-3" style="width: 60px; height: 60px; object-fit: cover;" alt="">
+                                                </div>
+                                            </th>
+                                            <td class="py-3">
+                                                <div class="product-name">
+                                                    <div class="main-name">Bakpia Basah</div>
+                                                    <div class="variant">Kacang Hijau</div>
+                                                </div>
+                                            </td>
+                                            <td class="py-3">Rp 35.000</td>
+                                            <td class="py-3">
+                                                <div class="quantity-group">
+                                                    <button type="button" class="quantity-btn btn-minus" data-row="1"><i class="fa fa-minus"></i></button>
+                                                    <input type="number" class="quantity-input" data-row="1" value="1" min="0">
+                                                    <button type="button" class="quantity-btn btn-plus" data-row="1"><i class="fa fa-plus"></i></button>
+                                                </div>
+                                            </td>
+                                            <td class="py-3"><span class="row-total" data-row="1">Rp 35.000</span></td>
+                                        </tr>
+                                        <tr data-row-id="2">
+                                            <th scope="row">
+                                                <div class="d-flex align-items-center mt-2">
+                                                    <img src="img/bakpiakumbuhitam.jpg" class="img-fluid me-3" style="width: 60px; height: 60px; object-fit: cover;" alt="">
+                                                </div>
+                                            </th>
+                                            <td class="py-3">
+                                                <div class="product-name">
+                                                    <div class="main-name">Bakpia Basah</div>
+                                                    <div class="variant">Kumbu Hitam</div>
+                                                </div>
+                                            </td>
+                                            <td class="py-3">Rp 35.000</td>
+                                            <td class="py-3">
+                                                <div class="quantity-group">
+                                                    <button type="button" class="quantity-btn btn-minus" data-row="2"><i class="fa fa-minus"></i></button>
+                                                    <input type="number" class="quantity-input" data-row="2" value="2" min="0">
+                                                    <button type="button" class="quantity-btn btn-plus" data-row="2"><i class="fa fa-plus"></i></button>
+                                                </div>
+                                            </td>
+                                            <td class="py-3"><span class="row-total" data-row="2">Rp 70.000</span></td>
+                                        </tr>
+                                        <tr data-row-id="3">
+                                            <th scope="row">
+                                                <div class="d-flex align-items-center mt-2">
+                                                    <img src="img/bakpiakeju.jpg" class="img-fluid me-3" style="width: 60px; height: 60px; object-fit: cover;" alt="">
+                                                </div>
+                                            </th>
+                                            <td class="py-3">
+                                                <div class="product-name">
+                                                    <div class="main-name">Bakpia Basah</div>
+                                                    <div class="variant">Keju</div>
+                                                </div>
+                                            </td>
+                                            <td class="py-3">Rp 35.000</td>
+                                            <td class="py-3">
+                                                <div class="quantity-group">
+                                                    <button type="button" class="quantity-btn btn-minus" data-row="3"><i class="fa fa-minus"></i></button>
+                                                    <input type="number" class="quantity-input" data-row="3" value="2" min="0">
+                                                    <button type="button" class="quantity-btn btn-plus" data-row="3"><i class="fa fa-plus"></i></button>
+                                                </div>
+                                            </td>
+                                            <td class="py-3"><span class="row-total" data-row="3">Rp 70.000</span></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">
+                                            </th>
+                                            <td class="py-3"></td>
+                                            <td class="py-3"></td>
+                                            <td class="py-3">
+                                                <p class="mb-0 text-dark py-2 fw-bold">Subtotal</p>
+                                            </td>
+                                            <td class="py-3">
+                                                <div class="py-2 border-bottom border-top">
+                                                    <p class="mb-0 text-dark fw-bold subtotal">Rp 175.000</p>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">
+                                            </th>
+                                            <td class="py-3">
+                                                <p class="mb-0 text-dark py-2 fw-bold">Pengiriman</p>
+                                            </td>
+                                            <td colspan="3" class="py-3">
+                                                <div class="form-check text-start">
+                                                    <input type="radio" class="form-check-input bg-primary border-0" id="Shipping-1" name="shipping" value="0" checked>
+                                                    <label class="form-check-label" for="Shipping-1">Pengiriman Gratis</label>
+                                                </div>
+                                                <div class="form-check text-start">
+                                                    <input type="radio" class="form-check-input bg-primary border-0" id="Shipping-2" name="shipping" value="3000">
+                                                    <label class="form-check-label" for="Shipping-2">Tarif Flat: Rp 3.000</label>
+                                                </div>
+                                                <div class="form-check text-start">
+                                                    <input type="radio" class="form-check-input bg-primary border-0" id="Shipping-3" name="shipping" value="0">
+                                                    <label class="form-check-label" for="Shipping-3">Ambil Sendiri: Rp 0</label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">
+                                            </th>
+                                            <td class="py-3">
+                                                <p class="mb-0 text-dark text-uppercase py-2 fw-bold">TOTAL</p>
+                                            </td>
+                                            <td class="py-3"></td>
+                                            <td class="py-3"></td>
+                                            <td class="py-3">
+                                                <div class="py-2 border-bottom border-top">
+                                                    <p class="mb-0 text-dark fw-bold grandtotal">Rp 175.000</p>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="row g-4 text-center align-items-center justify-content-center border-bottom py-3">
+                                <div class="col-12">
+                                    <div class="form-check text-start my-3">
+                                        <input type="checkbox" class="form-check-input bg-primary border-0" id="Transfer-1" name="Transfer" value="Transfer">
+                                        <label class="form-check-label" for="Transfer-1">Transfer Bank Langsung</label>
+                                    </div>
+                                    <p class="text-start text-dark">Lakukan pembayaran langsung ke rekening bank kami. Gunakan ID Pesanan sebagai referensi pembayaran. Pesanan tidak akan dikirim sampai dana masuk ke rekening kami.</p>
+                                </div>
+                            </div>
+                            <div class="row g-4 text-center align-items-center justify-content-center border-bottom py-3">
+                                <div class="col-12">
+                                    <div class="form-check text-start my-3">
+                                        <input type="checkbox" class="form-check-input bg-primary border-0" id="Payments-1" name="Payments" value="Payments">
+                                        <label class="form-check-label" for="Payments-1">Pembayaran Cek</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row g-4 text-center align-items-center justify-content-center border-bottom py-3">
+                                <div class="col-12">
+                                    <div class="form-check text-start my-3">
+                                        <input type="checkbox" class="form-check-input bg-primary border-0" id="Delivery-1" name="Delivery" value="Delivery">
+                                        <label class="form-check-label" for="Delivery-1">Bayar di Tempat</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row g-4 text-center align-items-center justify-content-center border-bottom py-3">
+                                <div class="col-12">
+                                    <div class="form-check text-start my-3">
+                                        <input type="checkbox" class="form-check-input bg-primary border-0" id="Paypal-1" name="Paypal" value="Paypal">
+                                        <label class="form-check-label" for="Paypal-1">Paypal</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row g-4 text-center align-items-center justify-content-center pt-4">
+                                <button type="submit" class="btn border-secondary py-3 px-4 text-uppercase w-100 text-primary">Selesaikan Pesanan</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- Checkout Page End -->
+
+        <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5">
+            <div class="container py-5">
+                <div class="pb-4 mb-4" style="border-bottom: 1px solid rgba(226, 175, 24, 0.5) ;">
+                    <div class="row g-4">
+                        <div class="col-lg-3">
+                            <a href="#">
+                                <h1 class="text-primary mb-0">Jastip Jogjaku08</h1>
+                            </a>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="position-relative mx-auto">
+                                <input class="form-control border-0 w-100 py-3 px-4 rounded-pill" type="email" placeholder="Email Anda">
+                                <button type="submit" class="btn btn-primary border-0 border-secondary py-3 px-4 position-absolute rounded-pill text-white" style="top: 0; right: 0;">Berlangganan Sekarang</button>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="d-flex justify-content-end pt-3">
+                                <a class="btn  btn-outline-secondary me-2 btn-md-square rounded-circle" href=""><i class="fab fa-twitter"></i></a>
+                                <a class="btn btn-outline-secondary me-2 btn-md-square rounded-circle" href=""><i class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-outline-secondary me-2 btn-md-square rounded-circle" href=""><i class="fab fa-youtube"></i></a>
+                                <a class="btn btn-outline-secondary btn-md-square rounded-circle" href=""><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-5">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-item">
+                            <h4 class="text-light mb-3">Mengapa Orang Suka Kami!</h4>
+                            <p class="mb-4">Jastip Jogjaku 08 dikenal dengan layanan cepat, aman, dan jelas dalam setiap transaksi. Kami menjaga kualitas belanja tetap mudah dan terpercaya, sehingga pelanggan selalu merasa puas saat menitipkan kebutuhan mereka kepada kami.</p>
+                            <a href="" class="btn border-secondary py-2 px-4 rounded-pill text-primary">Baca Selengkapnya</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="d-flex flex-column text-start footer-item">
+                            <h4 class="text-light mb-3">Info Toko</h4>
+                            <a class="btn-link" href="">Tentang Kami</a>
+                            <a class="btn-link" href="">Hubungi Kami</a>
+                            <a class="btn-link" href="">Kebijakan Privasi</a>
+                            <a class="btn-link" href="">Syarat & Ketentuan</a>
+                            <a class="btn-link" href="">Kebijakan Pengembalian</a>
+                            <a class="btn-link" href="">FAQ & Bantuan</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="d-flex flex-column text-start footer-item">
+                            <h4 class="text-light mb-3">Akun</h4>
+                            <a class="btn-link" href="">Akun Saya</a>
+                            <a class="btn-link" href="">Detail Toko</a>
+                            <a class="btn-link" href="">Keranjang Belanja</a>
+                            <a class="btn-link" href="">Daftar Keinginan</a>
+                            <a class="btn-link" href="">Riwayat Pesanan</a>
+                            <a class="btn-link" href="">Pesanan Internasional</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-item">
+                            <h4 class="text-light mb-3">Kontak</h4>
+                            <p>Alamat: Bayuraden Gamping, Sleman Yogyakarta 55281</p>
+                            <p>Email: rachmatagustyan@gmail.com</p>
+                            <p>Telepon: 085357899235</p>
+                            <p>Pembayaran Diterima</p>
+                            <img src="img/payment.png" class="img-fluid" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+
+        <!-- Copyright Start -->
+        <div class="container-fluid copyright bg-dark py-4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                    </div>
+                    <div class="col-md-6 my-auto text-center text-md-end text-white">
+                        Dirancang oleh Rachmat Dwi Agustyan untuk Jastip Jogjaku08
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Copyright End -->
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>   
+
+        
+    <!-- JavaScript Libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/lightbox/js/lightbox.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+
+    <!-- Custom Script for Checkout Quantity & Total Update -->
+    <script>
+    $(document).ready(function() {
+        // Fungsi update total per row
+        function updateRowTotal(rowId) {
+            var row = $('tr[data-row-id="' + rowId + '"]');
+            var input = row.find('.quantity-input[data-row="' + rowId + '"]');
+            var quantity = parseInt(input.val()) || 0;
+            if (quantity < 0) quantity = 0;
+            input.val(quantity);
+            var priceText = row.find('td:nth-child(3)').text().trim().replace('Rp ', '').replace(/\./g, '');
+            var price = parseFloat(priceText) || 0;
+            var total = price * quantity;
+            row.find('.row-total[data-row="' + rowId + '"]').text('Rp ' + total.toLocaleString('id-ID'));
+            updateSubtotal();
+        }
+
+        // Fungsi update subtotal dan grandtotal
+        function updateSubtotal() {
+            var subtotal = 0;
+            $('tr[data-row-id]').each(function() {
+                var quantity = parseInt($(this).find('.quantity-input').val()) || 0;
+                if (quantity > 0) {
+                    var totalText = $(this).find('.row-total').text().trim().replace('Rp ', '').replace(/\./g, '');
+                    subtotal += parseFloat(totalText) || 0;
+                }
+            });
+            $('.subtotal').text('Rp ' + subtotal.toLocaleString('id-ID'));
+            updateGrandTotal();
+        }
+
+        // Fungsi update grand total berdasarkan shipping
+        function updateGrandTotal() {
+            var subtotal = parseFloat($('.subtotal').text().replace('Rp ', '').replace(/\./g, '')) || 0;
+            var shippingValue = parseInt($('input[name="shipping"]:checked').val()) || 0;
+            var grandTotal = subtotal + shippingValue;
+            $('.grandtotal').text('Rp ' + grandTotal.toLocaleString('id-ID'));
+        }
+
+        // Event Plus button
+        $(document).on('click', '.btn-plus', function() {
+            var rowId = $(this).data('row');
+            var input = $('input[data-row="' + rowId + '"]');
+            var quantity = parseInt(input.val()) + 1;
+            input.val(quantity);
+            updateRowTotal(rowId);
+        });
+
+        // Event Minus button
+        $(document).on('click', '.btn-minus', function() {
+            var rowId = $(this).data('row');
+            var input = $('input[data-row="' + rowId + '"]');
+            var quantity = parseInt(input.val()) - 1;
+            if (quantity < 0) quantity = 0;
+            input.val(quantity);
+            updateRowTotal(rowId);
+        });
+
+        // Event Input Manual
+        $(document).on('input change', '.quantity-input', function() {
+            var rowId = $(this).data('row');
+            updateRowTotal(rowId);
+        });
+
+        // Event Shipping Change
+        $(document).on('change', 'input[name="shipping"]', function() {
+            updateGrandTotal();
+        });
+
+        // Initial update
+        $('tr[data-row-id]').each(function() {
+            var rowId = $(this).data('row-id');
+            updateRowTotal(rowId);
+        });
+        updateSubtotal();
+        updateGrandTotal();
+    });
+    </script>
+    </body>
+
+</html>

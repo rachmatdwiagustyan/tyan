@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="id">
+
+    <head>
+        <meta charset="utf-8">
+        <title>Jastip Jogjaku08 - Toko</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="" name="keywords">
+        <meta content="" name="description">
+
+        <!-- Google Web Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@600;800&display=swap" rel="stylesheet"> 
+
+        <!-- Icon Font Stylesheet -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+        <!-- Libraries Stylesheet -->
+        <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+        <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+        <!-- Customized Bootstrap Stylesheet -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Template Stylesheet -->
+        <link href="css/style.css" rel="stylesheet">
+        <!-- Custom CSS untuk Footer dan Toko -->
+        <style>
+            .footer-item {
+                padding-left: 0;
+            }
+            .footer-item.text-start {
+                padding-left: 20px; /* Tambah padding kiri untuk kolom Shop Info dan Account agar gak terlalu ke kiri */
+            }
+            .footer-item h4 {
+                text-align: left;
+            }
+            .footer-item p {
+                text-align: left;
+            }
+            .footer-item a {
+                text-align: left;
+            }
+            /* Custom untuk Produk Unggulan - Rapihkan layout */
+            .featured-product-item {
+                border-bottom: 1px solid #eee; /* Garis pemisah tipis */
+                padding-bottom: 15px;
+            }
+
+            .featured-product-item:last-child {
+                border-bottom: none; /* Hilangin garis di item terakhir */
+            }
+
+            .featured-product-item .text-truncate {
+                max-width: 150px; /* Batasi lebar nama produk biar gak panjang banget */
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .featured-product-item img {
+                object-fit: cover; /* Gambar crop rapi, gak distorsi */
+            }
+
+            @media (max-width: 768px) { /* Mobile responsive */
+                .featured-product-item {
+                    flex-direction: column !important; /* Stack gambar atas, teks bawah */
+                    text-align: center;
+                    gap: 10px;
+                }
+                
+                .featured-product-item .text-truncate {
+                    max-width: 100%; /* Di mobile, nama full width */
+                }
+                
+                .featured-product-item img {
+                    width: 100px !important; /* Sedikit lebih besar di mobile */
+                    height: 100px !important;
+                }
+            }
+
+            /* Fix harga biar align horizontal */
+            .featured-product-item .d-flex.align-items-center.flex-wrap.gap-1 {
+                justify-content: space-between;
+                width: 100%;
+            }
+
+            /* Custom untuk ikon kategori - Sesuai dengan gambar terbaru */
+            .fruite-categorie li i {
+                margin-right: 0.5rem; /* Spasi lebih rapi */
+                font-size: 1.1rem;
+            }
+            .fruite-categorie .fa-seedling { /* Kacang Hijau & Kumbu Hitam - merah */
+                color: #dc3545;
+            }
+            .fruite-categorie .fa-cube { /* Keju - hijau */
+                color: #28a745;
+            }
+            .fruite-categorie .fa-utensils { /* Coklat - hijau */
+                color: #28a745;
+            }
+            .fruite-categorie .fa-leaf { /* Pandan - hijau (ganti dari Durian) */
+                color: #28a745;
+            }
+            /* Nama kategori sudah hijau dari template CSS */
+
+            /* Custom untuk badge Official Store */
+            .official-badge {
+                background: linear-gradient(45deg, #ffd700, #ffed4e);
+                color: #333;
+                padding: 4px 8px;
+                border-radius: 4px;
+                font-size: 0.8rem;
+                font-weight: bold;
+                position: absolute;
+                top: 10px;
+                left: 10px;
+                z-index: 10;
+            }
+
+            /* Custom untuk rating 4.5 */
+            .star-rating .fa-star.text-warning {
+                color: #ffc107 !important;
+            }
+
+            /* Custom untuk label ISI 10 */
+            .product-label {
+                background: #ffc107;
+                color: #333;
+                padding: 2px 6px;
+                border-radius: 4px;
+                font-size: 0.8rem;
+                font-weight: bold;
+                margin-left: 10px;
+            }
+
+            /* Quantity controls styling */
+            .quantity-controls {
+                display: flex;
+                align-items: center;
+                gap: 5px;
+            }
+
+            .quantity-controls button {
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                border: 1px solid #ddd;
+                background: white;
+                color: #666;
+            }
+
+            .quantity-controls input {
+                width: 40px;
+                text-align: center;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                padding: 4px;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <!-- Spinner Start -->
+        <div id="spinner" class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
+            <div class="spinner-grow text-primary" role="status"></div>
+        </div>
+        <!-- Spinner End -->
+
+        <!-- Navbar start -->
+        <div class="container-fluid fixed-top">
+            <div class="topbar bg-primary d-none d-lg-block" style="height: 60px; padding: 15px 0; width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; border-radius: 0;">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="top-info ps-3">
+                        <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a href="#" class="text-white">Bayuraden Gamping, Sleman Yogyakarta 55281</a></small>
+                        <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a href="#" class="text-white">rachmatagustyan@gmail.com</a></small>
+                    </div>
+                    <div class="top-link pe-3">
+                        <a href="#" class="text-white"><small class="text-white mx-2">Kebijakan Privasi</small>/</a>
+                        <a href="#" class="text-white"><small class="text-white mx-2">Syarat Penggunaan</small>/</a>
+                        <a href="#" class="text-white"><small class="text-white ms-2">Penjualan dan Pengembalian</small></a>
+                    </div>
+                </div>
+            </div>
+            <div class="container px-0">
+                <nav class="navbar navbar-light bg-white navbar-expand-xl">
+                    <a href="index.html" class="navbar-brand"><h1 class="text-primary display-6">Jastip Jogjaku08</h1></a>
+                    <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                        <span class="fa fa-bars text-primary"></span>
+                    </button>
+                    <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
+                        <div class="navbar-nav mx-auto">
+                            <a href="index.html" class="nav-item nav-link">Beranda</a>
+                            <a href="shop.html" class="nav-item nav-link active">Toko</a>
+                            <a href="shop-detail.html" class="nav-item nav-link">Detail Toko</a>
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Halaman</a>
+                                <div class="dropdown-menu m-0 bg-secondary rounded-0">
+                                    <a href="cart.html" class="dropdown-item">Keranjang</a>
+                                    <a href="chackout.html" class="dropdown-item">Pembayaran</a>
+                                    <a href="testimonial.html" class="dropdown-item">Testimoni</a>
+                                </div>
+                            </div>
+                            <a href="contact.html" class="nav-item nav-link">Kontak</a>
+                        </div>
+                        <div class="d-flex m-3 me-0">
+                            <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
+                            <a href="#" class="position-relative me-4 my-auto">
+                                <i class="fa fa-shopping-bag fa-2x"></i>
+                                <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">3</span>
+                            </a>
+                            <a href="#" class="my-auto">
+                                <i class="fas fa-user fa-2x"></i>
+                            </a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <!-- Navbar End -->
+
+        <!-- Modal Search Start -->
+        <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content rounded-0">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Cari dengan kata kunci</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body d-flex align-items-center">
+                        <div class="input-group w-75 mx-auto d-flex">
+                            <input type="search" class="form-control p-3" placeholder="kata kunci" aria-describedby="search-icon-1">
+                            <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Search End -->
+
+        <!-- Single Page Header start -->
+        <div class="container-fluid page-header py-5" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('img/bakpia.jpeg'); background-position: center; background-repeat: no-repeat; background-size: cover;">
+            <h1 class="text-center text-white display-6">Toko</h1>
+            <ol class="breadcrumb justify-content-center mb-0">
+                <li class="breadcrumb-item"><a href="#">Beranda</a></li>
+                <li class="breadcrumb-item"><a href="#">Halaman</a></li>
+                <li class="breadcrumb-item active text-white">Toko</li>
+            </ol>
+        </div>
+        <!-- Single Page Header End -->
+
+        <!-- Fruits Shop Start-->
+        <div class="container-fluid fruite py-5">
+            <div class="container py-5">
+                <h1 class="mb-4">Toko Bakpia Segar</h1>
+                <div class="row g-4">
+                    <div class="col-lg-12">
+                        <div class="row g-4">
+                            <div class="col-xl-3">
+                                <div class="input-group w-100 mx-auto d-flex">
+                                    <input type="search" class="form-control p-3" placeholder="kata kunci" aria-describedby="search-icon-1">
+                                    <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
+                                </div>
+                            </div>
+                            <div class="col-6"></div>
+                            <div class="col-xl-3">
+                                <div class="bg-light ps-3 py-3 rounded d-flex justify-content-between mb-4">
+                                    <label for="fruits">Pengurutan Default:</label>
+                                    <select id="fruits" name="fruitlist" class="border-0 form-select-sm bg-light me-3" form="fruitform">
+                                        <option value="volvo">Tidak Ada</option>
+                                        <option value="saab">Populer</option>
+                                        <option value="opel">Organik</option>
+                                        <option value="audi">Fantastis</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row g-4">
+                            <div class="col-lg-3">
+                                <div class="row g-4">
+                                    <div class="col-lg-12">
+                                        <div class="mb-3">
+                                            <h4>Kategori</h4>
+                                            <ul class="list-unstyled fruite-categorie">
+                                                <li>
+                                                    <div class="d-flex justify-content-between fruite-name">
+                                                        <a href="#"><i class="fas fa-seedling me-2"></i>Kacang Hijau</a>
+                                                        <span>(3)</span>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="d-flex justify-content-between fruite-name">
+                                                        <a href="#"><i class="fas fa-seedling me-2"></i>Kumbu Hitam</a>
+                                                        <span>(5)</span>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="d-flex justify-content-between fruite-name">
+                                                        <a href="#"><i class="fas fa-cube me-2"></i>Keju</a>
+                                                        <span>(2)</span>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="d-flex justify-content-between fruite-name">
+                                                        <a href="#"><i class="fas fa-utensils me-2"></i>Coklat</a>
+                                                        <span>(8)</span>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="d-flex justify-content-between fruite-name">
+                                                        <a href="#"><i class="fas fa-leaf me-2"></i>Pandan</a>
+                                                        <span>(5)</span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="mb-3">
+                                            <h4>Tambahan</h4>
+                                            <div class="mb-2">
+                                                <input type="radio" class="me-2" id="Categories-1" name="Categories-1" value="Beverages">
+                                                <label for="Categories-1"> Kukus</label>
+                                            </div>
+                                            <div class="mb-2">
+                                                <input type="radio" class="me-2" id="Categories-2" name="Categories-1" value="Beverages">
+                                                <label for="Categories-2"> Panggang</label>
+                                            </div>
+                                            <div class="mb-2">
+                                                <input type="radio" class="me-2" id="Categories-3" name="Categories-1" value="Beverages">
+                                                <label for="Categories-3"> Diskon</label>
+                                            </div>
+                                            <div class="mb-2">
+                                                <input type="radio" class="me-2" id="Categories-4" name="Categories-1" value="Beverages">
+                                                <label for="Categories-4"> Premium</label>
+                                            </div>
+                                            <div class="mb-2">
+                                                <input type="radio" class="me-2" id="Categories-5" name="Categories-1" value="Beverages">
+                                                <label for="Categories-5"> Isi 10</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <h4 class="mb-3">Produk Unggulan</h4>
+                                        <div class="d-flex align-items-center justify-content-start">
+                                            <div class="rounded me-4" style="width: 100px; height: 100px;">
+                                                <img src="img/bakpiakeju.jpg" class="img-fluid rounded" alt="">
+                                            </div>
+                                            <div>
+                                                <h6 class="mb-2">Bakpia Keju</h6>
+                                                <div class="d-flex mb-2">
+                                                    <i class="fa fa-star text-secondary"></i>
+                                                    <i class="fa fa-star text-secondary"></i>
+                                                    <i class="fa fa-star text-secondary"></i>
+                                                    <i class="fa fa-star text-secondary"></i>
+                                                    <i class="fa fa-star"></i>
+                                                </div>
+                                                <div class="d-flex mb-2">
+                                                    <h5 class="fw-bold me-2">Rp 35.000</h5>
+                                                    <h5 class="text-danger text-decoration-line-through">Rp 45.000</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-start">
+                                            <div class="rounded me-4" style="width: 100px; height: 100px;">
+                                                <img src="img/bakpiakumbuhitam.jpg" class="img-fluid rounded" alt="">
+                                            </div>
+                                            <div>
+                                                <h6 class="mb-2">Bakpia Kumbu Hitam</h6>
+                                                <div class="d-flex mb-2">
+                                                    <i class="fa fa-star text-secondary"></i>
+                                                    <i class="fa fa-star text-secondary"></i>
+                                                    <i class="fa fa-star text-secondary"></i>
+                                                    <i class="fa fa-star text-secondary"></i>
+                                                    <i class="fa fa-star"></i>
+                                                </div>
+                                                <div class="d-flex mb-2">
+                                                    <h5 class="fw-bold me-2">Rp 35.000</h5>
+                                                    <h5 class="text-danger text-decoration-line-through">Rp 45.000</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-start">
+                                            <div class="rounded me-4" style="width: 100px; height: 100px;">
+                                                <img src="img/bakpiakukustuguoriginal.jpg" class="img-fluid rounded" alt="">
+                                            </div>
+                                            <div>
+                                                <h6 class="mb-2">Bakpia Tugu Coklat</h6>
+                                                <div class="d-flex mb-2">
+                                                    <i class="fa fa-star text-secondary"></i>
+                                                    <i class="fa fa-star text-secondary"></i>
+                                                    <i class="fa fa-star text-secondary"></i>
+                                                    <i class="fa fa-star text-secondary"></i>
+                                                    <i class="fa fa-star"></i>
+                                                </div>
+                                                <div class="d-flex mb-2">
+                                                    <h5 class="fw-bold me-2">Rp 50.000</h5>
+                                                    <h5 class="text-danger text-decoration-line-through">Rp 60.000</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-center my-4">
+                                            <a href="#" class="btn border border-secondary px-4 py-3 rounded-pill text-primary w-100">Lihat Lebih Banyak</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="position-relative">
+                                            <img src="img/bakpia.jpeg" class="img-fluid w-100 rounded" alt="">
+                                            <div class="position-absolute" style="top: 50%; right: 10px; transform: translateY(-50%);">
+                                                <h3 class="text-secondary fw-bold">Bakpia <br> tugu <br> Jogja</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-9">
+                                <div class="row g-4 justify-content-center">
+                                    <div class="col-md-6 col-lg-6 col-xl-4">
+                                        <div class="rounded position-relative vesitable-item">
+                                            <div class="vesitable-img">
+                                                <img src="img/bakpiakumbuhitam.jpg" class="img-fluid w-100 rounded-top" alt="">
+                                            </div>
+                                            <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Bakpia</div>
+                                            <div class="p-4 pb-0 rounded-bottom">
+                                                <h4>Bakpia Kumbu Hitam</h4>
+                                                <p>Bakpia kumbu hitam memiliki kulit yang lembut dengan isian kacang hijau hitam yang manis, legit, dan khas. Rasanya lembut di mulut dengan cita rasa tradisional yang nikmat untuk dinikmati kapan saja.</p>
+                                                <div class="d-flex justify-content-between flex-lg-wrap">
+                                                    <p class="text-dark fs-5 fw-bold">Rp 35.000 / box</p>
+                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Tambah ke Keranjang</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-xl-4">
+                                        <div class="rounded position-relative vesitable-item">
+                                            <div class="vesitable-img">
+                                                <img src="img/bakpiakeju.jpg" class="img-fluid w-100 rounded-top" alt="">
+                                            </div>
+                                            <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Bakpia</div>
+                                            <div class="p-4 pb-0 rounded-bottom">
+                                                <h4>Bakpia Keju</h4>
+                                                <p>Bakpia keju memiliki kulit yang lembut dengan isian keju yang gurih dan creamy. Perpaduan rasa manis ringan dan gurih menjadikannya bakpia yang lezat dan cocok dinikmati kapan saja</p>
+                                                <div class="d-flex justify-content-between flex-lg-wrap">
+                                                    <p class="text-dark fs-5 fw-bold">Rp 35.000 / box</p>
+                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Tambah ke Keranjang</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-xl-4">
+                                        <div class="rounded position-relative vesitable-item">
+                                            <div class="vesitable-img">
+                                                <img src="img/bakpiajuwara.jpg" class="img-fluid w-100 rounded-top bg-light" alt="">
+                                            </div>
+                                            <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Bakpia</div>
+                                            <div class="p-4 pb-0 rounded-bottom">
+                                                <h4>Bakpia Coklat</h4>
+                                                <p>Bakpia coklat memiliki kulit yang lembut dengan isian coklat yang manis dan lumer. Rasa coklatnya yang kaya menjadikan bakpia ini camilan favorit untuk dinikmati kapan saja</p>
+                                                <div class="d-flex justify-content-between flex-lg-wrap">
+                                                    <p class="text-dark fs-5 fw-bold">Rp 35.000 / box</p>
+                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Tambah ke Keranjang</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-xl-4">
+                                        <div class="rounded position-relative vesitable-item">
+                                            <div class="vesitable-img">
+                                                <img src="img/bakpiakukustugupandancoklat.jpg" class="img-fluid w-100 rounded-top" alt="">
+                                            </div>
+                                            <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Bakpia</div>
+                                            <div class="p-4 pb-0 rounded-bottom">
+                                                <h4>Bakpia Kukus Pandan Coklat</h4>
+                                                <p>Bakpia kukus pandan coklat memiliki tekstur lembut dan empuk dengan aroma pandan yang harum. Dipadukan dengan isian coklat yang manis dan lumer, bakpia ini menghadirkan perpaduan rasa tradisional dan modern yang lezat</p>
+                                                <div class="d-flex justify-content-between flex-lg-wrap">
+                                                    <p class="text-dark fs-5 fw-bold">Rp 50.000 / box </p>
+                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Tambah ke Keranjang</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-xl-4">
+                                        <div class="rounded position-relative vesitable-item">
+                                            <div class="vesitable-img">
+                                                <img src="img/bakpiakukustuguoriginal.jpg" class="img-fluid w-100 rounded-top" alt="">
+                                            </div>
+                                            <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Bakpia</div>
+                                            <div class="p-4 pb-0 rounded-bottom">
+                                                <h4>Bakpia Kukus Tugu Coklat</h4>
+                                                <p>Bakpia kukus Tugu coklat memiliki tekstur lembut dan empuk dengan isian coklat yang manis dan lumer. Rasa coklat yang kaya berpadu dengan adonan kukus yang ringan, cocok dinikmati sebagai camilan favorit kapan saja</p>
+                                                <div class="d-flex justify-content-between flex-lg-wrap">
+                                                    <p class="text-dark fs-5 fw-bold">Rp 50.000 / box</p>
+                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Tambah ke Keranjang</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-xl-4">
+                                        <div class="rounded position-relative vesitable-item">
+                                            <div class="vesitable-img">
+                                                <img src="img/bakpiatugukeju.jpg" class="img-fluid w-100 rounded-top" alt="">
+                                            </div>
+                                            <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Bakpia</div>
+                                            <div class="p-4 pb-0 rounded-bottom">
+                                                <h4>Bakpia Kukus Tugu Keju</h4>
+                                                <p>Bakpia kukus Tugu keju memiliki tekstur lembut dan empuk dengan isian keju yang gurih dan creamy. Rasa kejunya yang khas berpadu dengan adonan kukus yang ringan, menjadikannya camilan lezat untuk segala suasana</p>
+                                                <div class="d-flex justify-content-between flex-lg-wrap">
+                                                    <p class="text-dark fs-5 fw-bold">Rp 50.000 / box</p>
+                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Tambah ke Keranjang</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-xl-4">
+                                        <div class="rounded position-relative vesitable-item">
+                                            <div class="vesitable-img">
+                                                <img src="img/bakpiaredvelvet.jpg" class="img-fluid w-100 rounded-top" alt="">
+                                            </div>
+                                            <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Bakpia</div>
+                                            <div class="p-4 pb-0 rounded-bottom">
+                                                <h4>Bakpia Kukus Tugu Redvelvet</h4>
+                                                <p>Bakpia kukus Tugu red velvet memiliki tekstur lembut dan empuk dengan isian red velvet yang manis dan creamy. Perpaduan rasa khas red velvet dan aroma lembut kukusan menjadikannya camilan modern yang lezat dan menarik</p>
+                                                <div class="d-flex justify-content-between flex-lg-wrap">
+                                                    <p class="text-dark fs-5 fw-bold">Rp 50.000 / box</p>
+                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Tambah ke Keranjang</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-xl-4">
+                                        <div class="rounded position-relative vesitable-item">
+                                            <div class="vesitable-img">
+                                                <img src="img/bakpiaklepon.jpg" class="img-fluid w-100 rounded-top" alt="">
+                                            </div>
+                                            <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Bakpia</div>
+                                            <div class="p-4 pb-0 rounded-bottom">
+                                                <h4>Bakpia Kukus Tugu Klepon</h4>
+                                                <p>Bakpia kukus Tugu klepon memiliki tekstur lembut dan empuk dengan isian gula aren cair yang manis legit. Dipadukan aroma pandan yang harum, bakpia ini menghadirkan cita rasa klepon khas yang autentik dan menggugah selera</p>
+                                                <div class="d-flex justify-content-between flex-lg-wrap">
+                                                    <p class="text-dark fs-5 fw-bold">Rp 50.000 / box</p>
+                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Tambah ke Keranjang</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-xl-4">
+                                        <div class="rounded position-relative vesitable-item">
+                                            <div class="vesitable-img">
+                                                <img src="img/bakpiakeju.jpg" class="img-fluid w-100 rounded-top" alt="">
+                                            </div>
+                                            <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Bakpia</div>
+                                            <div class="p-4 pb-0 rounded-bottom">
+                                                <h4>Bakpia Keju Premium</h4>
+                                                <p>Bakpia keju memiliki kulit yang lembut dengan isian keju yang gurih dan creamy. Perpaduan rasa manis ringan dari kulit bakpia dan keju yang lezat menjadikannya camilan favorit untuk dinikmati kapan saja.</p>
+                                                <div class="d-flex justify-content-between flex-lg-wrap">
+                                                    <p class="text-dark fs-5 fw-bold">Rp 35.000 / box</p>
+                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Tambah ke Keranjang</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-xl-4">
+                                        <div class="rounded position-relative vesitable-item">
+                                            <div class="vesitable-img">
+                                                <img src="img/almondtart keju.jpg" class="img-fluid w-100 rounded-top" alt="">
+                                            </div>
+                                            <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Bakpia</div>
+                                            <div class="p-4 pb-0 rounded-bottom">
+                                                <h4>Almond Tart Keju</h4>
+                                                <p>Almond tart keju memiliki kulit tart yang renyah dengan isian keju yang lembut dan gurih. Dipadukan dengan taburan almond di atasnya, kue ini menghadirkan cita rasa keju yang creamy dan lezat, cocok bagi pencinta rasa gurih</p>
+                                                <div class="d-flex justify-content-between flex-lg-wrap">
+                                                    <p class="text-dark fs-5 fw-bold">Rp 45.000 / box</p>
+                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Tambah ke Keranjang</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-xl-4">
+                                        <div class="rounded position-relative vesitable-item">
+                                            <div class="official-badge">OFFICIAL STORE</div>
+                                            <div class="vesitable-img">
+                                                <img src="img/bakpiakacanghijaujuwara.jpg" class="img-fluid w-100 rounded-top" alt="">
+                                            </div>
+                                            <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Bakpia</div>
+                                            <div class="p-4 pb-0 rounded-bottom">
+                                                <h4>Bakpia Basah Kacang Hijau</h4>
+                                                <p>Bakpia kacang hijau memiliki kulit yang lembut dengan isian kacang hijau yang manis, halus, dan legit. Cita rasa klasik ini menjadikan bakpia camilan tradisional yang digemari sepanjang waktu.</p>
+                                                <div class="d-flex justify-content-between flex-lg-wrap">
+                                                    <p class="text-dark fs-5 fw-bold">Rp 40.000 / box <span class="product-label">ISI 10</span></p>
+                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Tambah ke Keranjang</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-xl-4">
+                                        <div class="rounded position-relative vesitable-item">
+                                            <div class="official-badge">OFFICIAL STORE</div>
+                                            <div class="vesitable-img">
+                                                <img src="img/almondtart Coklat.jpg" class="img-fluid w-100 rounded-top" alt="">
+                                            </div>
+                                            <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Bakpia</div>
+                                            <div class="p-4 pb-0 rounded-bottom">
+                                                <h4>Almond Tart Coklat</h4>
+                                                <p>Almond tart coklat memiliki kulit tart yang renyah dengan isian coklat pekat yang lembut dan manis. Ditaburi irisan almond di bagian atas, kue ini memberikan rasa coklat yang kaya dengan sensasi gurih dari almond, cocok untuk pencinta coklat.</p>
+                                                <div class="d-flex justify-content-between flex-lg-wrap">
+                                                    <p class="text-dark fs-5 fw-bold">Rp 45.000 / box <span class="product-label">ISI 10</span></p>
+                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Tambah ke Keranjang</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="pagination d-flex justify-content-center mt-5">
+                                            <a href="#" class="rounded">&laquo;</a>
+                                            <a href="#" class="active rounded">1</a>
+                                            <a href="#" class="rounded">2</a>
+                                            <a href="#" class="rounded">3</a>
+                                            <a href="#" class="rounded">4</a>
+                                            <a href="#" class="rounded">5</a>
+                                            <a href="#" class="rounded">6</a>
+                                            <a href="#" class="rounded">&raquo;</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Fruits Shop End-->
+
+        <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5">
+            <div class="container py-5">
+                <div class="pb-4 mb-4" style="border-bottom: 1px solid rgba(226, 175, 24, 0.5) ;">
+                    <div class="row g-4">
+                        <div class="col-lg-3">
+                            <a href="#">
+                                <h1 class="text-primary mb-0">Jastip Jogjaku08</h1>
+                            </a>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="position-relative mx-auto">
+                                <input class="form-control border-0 w-100 py-3 px-4 rounded-pill" type="email" placeholder="Email Anda">
+                                <button type="submit" class="btn btn-primary border-0 border-secondary py-3 px-4 position-absolute rounded-pill text-white" style="top: 0; right: 0;">Berlangganan Sekarang</button>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="d-flex justify-content-end pt-3">
+                                <a class="btn  btn-outline-secondary me-2 btn-md-square rounded-circle" href=""><i class="fab fa-twitter"></i></a>
+                                <a class="btn btn-outline-secondary me-2 btn-md-square rounded-circle" href=""><i class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-outline-secondary me-2 btn-md-square rounded-circle" href=""><i class="fab fa-youtube"></i></a>
+                                <a class="btn btn-outline-secondary btn-md-square rounded-circle" href=""><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-5">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-item">
+                            <h4 class="text-light mb-3">Mengapa Orang Suka Kami!</h4>
+                            <p class="mb-4">Jastip Jogjaku 08 dikenal dengan layanan cepat, aman, dan jelas dalam setiap transaksi. Kami menjaga kualitas belanja tetap mudah dan terpercaya, sehingga pelanggan selalu merasa puas saat menitipkan kebutuhan mereka kepada kami.</p>
+                            <a href="" class="btn border-secondary py-2 px-4 rounded-pill text-primary">Baca Selengkapnya</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="d-flex flex-column text-start footer-item">
+                            <h4 class="text-light mb-3">Info Toko</h4>
+                            <a class="btn-link" href="">Tentang Kami</a>
+                            <a class="btn-link" href="">Hubungi Kami</a>
+                            <a class="btn-link" href="">Kebijakan Privasi</a>
+                            <a class="btn-link" href="">Syarat & Ketentuan</a>
+                            <a class="btn-link" href="">Kebijakan Pengembalian</a>
+                            <a class="btn-link" href="">FAQ & Bantuan</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="d-flex flex-column text-start footer-item">
+                            <h4 class="text-light mb-3">Akun</h4>
+                            <a class="btn-link" href="">Akun Saya</a>
+                            <a class="btn-link" href="">Detail Toko</a>
+                            <a class="btn-link" href="">Keranjang Belanja</a>
+                            <a class="btn-link" href="">Daftar Keinginan</a>
+                            <a class="btn-link" href="">Riwayat Pesanan</a>
+                            <a class="btn-link" href="">Pesanan Internasional</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-item">
+                            <h4 class="text-light mb-3">Kontak</h4>
+                            <p>Alamat: Bayuraden, Gamping, Sleman, Yogyakarta 55281</p>
+                            <p>Email: rachmatagustyan@gmail.com</p>
+                            <p>Telepon: 085357899235</p>
+                            <p>Pembayaran Diterima</p>
+                            <img src="img/payment.png" class="img-fluid" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+
+        <!-- Copyright Start -->
+        <div class="container-fluid copyright bg-dark py-4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                    </div>
+                    <div class="col-md-6 my-auto text-center text-md-end text-white">
+                        Dirancang oleh Rachmat Dwi Agustyan untuk Jastip Jogjaku08
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Copyright End -->
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>   
+
+        
+    <!-- JavaScript Libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/lightbox/js/lightbox.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+    <!-- Custom JavaScript untuk Quantity -->
+    <script>
+        $(document).ready(function() {
+            $('.btn-plus').click(function() {
+                var input = $(this).closest('.quantity-controls').find('.quantity-input');
+                var currentVal = parseInt(input.val());
+                if (!isNaN(currentVal)) {
+                    input.val(currentVal + 1);
+                }
+            });
+
+            $('.btn-minus').click(function() {
+                var input = $(this).closest('.quantity-controls').find('.quantity-input');
+                var currentVal = parseInt(input.val());
+                if (!isNaN(currentVal) && currentVal > 1) {
+                    input.val(currentVal - 1);
+                }
+            });
+        });
+    </script>
+    </body>
+
+</html>
